@@ -1,0 +1,20 @@
+input pos=0 text=a t=0
+input pos=1 text=b t=10
+input pos=2 text=c t=20
+input pos=3 text=d t=30
+input pos=4 text=e t=40
+input pos=5 text=f t=50
+input pos=6 text=g t=60
+input pos=7 text=h t=70
+input pos=8 text=i t=80
+input pos=9 text=j t=90
+undo t=100
+undo t=110
+redo t=120
+redo t=130
+undo t=140
+undo t=150
+undo t=160
+redo t=170
+redo t=180
+redo t=190

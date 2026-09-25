@@ -1,0 +1,16 @@
+1|paste pos=0 text=abc t=0|S=1/8|T=abc|C=3|R=-|#1 paste n=1 ops=1
+2|paste pos=3 text=de t=100|S=1/8|T=abcde|C=5|R=-|#1 paste n=2 ops=1-2
+3|paste pos=5 text=fg t=150|S=1/8|T=abcdefg|C=7|R=-|#1 paste n=3 ops=1-3
+4|caret pos=2 t=200|S=1/8|T=abcdefg|C=2|R=-|#1 paste n=3 ops=1-3
+5|paste pos=2 text=xy t=300|S=2/8|T=abxycdefg|C=4|R=-|#1 paste n=3 ops=1-3;#2 paste n=1 ops=4
+6|paste pos=4 text=zw t=400|S=2/8|T=abxyzwcdefg|C=6|R=-|#1 paste n=3 ops=1-3;#2 paste n=2 ops=4-5
+7|paste pos=6 text=pq t=500|S=2/8|T=abxyzwpqcdefg|C=8|R=-|#1 paste n=3 ops=1-3;#2 paste n=3 ops=4-6
+8|undo t=1000|S=1/8|T=abcdefg|C=2|R=#2|#1 paste n=3 ops=1-3
+9|caret pos=7 t=1100|S=1/8|T=abcdefg|C=7|R=#2|#1 paste n=3 ops=1-3
+10|redo t=1200|S=2/8|T=abxyzwpqcdefg|C=8|R=-|#1 paste n=3 ops=1-3;#2 paste n=3 ops=4-6
+11|undo t=1300|S=1/8|T=abcdefg|C=2|R=#2|#1 paste n=3 ops=1-3
+12|input pos=2 text=q t=1400|S=2/8|T=abqcdefg|C=3|R=-|#1 paste n=3 ops=1-3;#3 input n=1 ops=7
+13|input pos=3 text=r t=1450|S=2/8|T=abqrcdefg|C=4|R=-|#1 paste n=3 ops=1-3;#3 input n=2 ops=7-8
+14|redo t=1500|S=2/8|T=abqrcdefg|C=4|R=-|#1 paste n=3 ops=1-3;#3 input n=2 ops=7-8
+15|undo t=1700|S=0/8|T=-|C=0|R=#1,#3|-
+16|redo t=1800|S=2/8|T=abqrcdefg|C=4|R=-|#1 paste n=3 ops=1-3;#3 input n=2 ops=7-8

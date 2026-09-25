@@ -1,0 +1,11 @@
+paste pos=0 text=abc t=0
+paste pos=3 text=de t=100
+paste pos=5 text=fgh t=150
+input pos=8 text=i t=200
+input pos=9 text=j t=250
+paste pos=10 text=kl t=300
+paste pos=12 text=mn t=400
+paste pos=14 text=op t=500
+paste pos=16 text=qr t=1001
+undo t=1100
+redo t=1200

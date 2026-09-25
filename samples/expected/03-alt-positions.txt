@@ -1,0 +1,23 @@
+1|input pos=0 text=a t=0|S=1/8|T=a|C=1|R=-|#1 input n=1 ops=1
+2|caret pos=1 t=100|S=1/8|T=a|C=1|R=-|#1 input n=1 ops=1
+3|input pos=1 text=b t=200|S=1/8|T=ab|C=2|R=-|#1 input n=2 ops=1-2
+4|caret pos=0 t=300|S=1/8|T=ab|C=0|R=-|#1 input n=2 ops=1-2
+5|input pos=0 text=c t=400|S=2/8|T=cab|C=1|R=-|#1 input n=2 ops=1-2;#2 input n=1 ops=3
+6|caret pos=3 t=500|S=2/8|T=cab|C=3|R=-|#1 input n=2 ops=1-2;#2 input n=1 ops=3
+7|input pos=3 text=d t=600|S=3/8|T=cabd|C=4|R=-|#1 input n=2 ops=1-2;#2 input n=1 ops=3;#3 input n=1 ops=4
+8|caret pos=0 t=700|S=3/8|T=cabd|C=0|R=-|#1 input n=2 ops=1-2;#2 input n=1 ops=3;#3 input n=1 ops=4
+9|input pos=0 text=e t=800|S=4/8|T=ecabd|C=1|R=-|#1 input n=2 ops=1-2;#2 input n=1 ops=3;#3 input n=1 ops=4;#4 input n=1 ops=5
+10|caret pos=5 t=900|S=4/8|T=ecabd|C=5|R=-|#1 input n=2 ops=1-2;#2 input n=1 ops=3;#3 input n=1 ops=4;#4 input n=1 ops=5
+11|input pos=5 text=f t=1000|S=5/8|T=ecabdf|C=6|R=-|#1 input n=2 ops=1-2;#2 input n=1 ops=3;#3 input n=1 ops=4;#4 input n=1 ops=5;#5 input n=1 ops=6
+12|caret pos=0 t=1100|S=5/8|T=ecabdf|C=0|R=-|#1 input n=2 ops=1-2;#2 input n=1 ops=3;#3 input n=1 ops=4;#4 input n=1 ops=5;#5 input n=1 ops=6
+13|input pos=0 text=g t=1200|S=6/8|T=gecabdf|C=1|R=-|#1 input n=2 ops=1-2;#2 input n=1 ops=3;#3 input n=1 ops=4;#4 input n=1 ops=5;#5 input n=1 ops=6;#6 input n=1 ops=7
+14|caret pos=7 t=1300|S=6/8|T=gecabdf|C=7|R=-|#1 input n=2 ops=1-2;#2 input n=1 ops=3;#3 input n=1 ops=4;#4 input n=1 ops=5;#5 input n=1 ops=6;#6 input n=1 ops=7
+15|input pos=7 text=h t=1400|S=7/8|T=gecabdfh|C=8|R=-|#1 input n=2 ops=1-2;#2 input n=1 ops=3;#3 input n=1 ops=4;#4 input n=1 ops=5;#5 input n=1 ops=6;#6 input n=1 ops=7;#7 input n=1 ops=8
+16|caret pos=0 t=1500|S=7/8|T=gecabdfh|C=0|R=-|#1 input n=2 ops=1-2;#2 input n=1 ops=3;#3 input n=1 ops=4;#4 input n=1 ops=5;#5 input n=1 ops=6;#6 input n=1 ops=7;#7 input n=1 ops=8
+17|input pos=0 text=i t=1600|S=8/8|T=igecabdfh|C=1|R=-|#1 input n=2 ops=1-2;#2 input n=1 ops=3;#3 input n=1 ops=4;#4 input n=1 ops=5;#5 input n=1 ops=6;#6 input n=1 ops=7;#7 input n=1 ops=8;#8 input n=1 ops=9
+18|caret pos=9 t=1700|S=8/8|T=igecabdfh|C=9|R=-|#1 input n=2 ops=1-2;#2 input n=1 ops=3;#3 input n=1 ops=4;#4 input n=1 ops=5;#5 input n=1 ops=6;#6 input n=1 ops=7;#7 input n=1 ops=8;#8 input n=1 ops=9
+19|input pos=9 text=j t=1800|S=8/8|T=igecabdfhj|C=10|R=-|#2 input n=1 ops=3;#3 input n=1 ops=4;#4 input n=1 ops=5;#5 input n=1 ops=6;#6 input n=1 ops=7;#7 input n=1 ops=8;#8 input n=1 ops=9;#9 input n=1 ops=10
+20|undo t=2000|S=5/8|T=gecabdf|C=7|R=#7,#8,#9|#2 input n=1 ops=3;#3 input n=1 ops=4;#4 input n=1 ops=5;#5 input n=1 ops=6;#6 input n=1 ops=7
+21|redo t=2100|S=8/8|T=igecabdfhj|C=10|R=-|#2 input n=1 ops=3;#3 input n=1 ops=4;#4 input n=1 ops=5;#5 input n=1 ops=6;#6 input n=1 ops=7;#7 input n=1 ops=8;#8 input n=1 ops=9;#9 input n=1 ops=10
+22|caret pos=0 t=2200|S=8/8|T=igecabdfhj|C=0|R=-|#2 input n=1 ops=3;#3 input n=1 ops=4;#4 input n=1 ops=5;#5 input n=1 ops=6;#6 input n=1 ops=7;#7 input n=1 ops=8;#8 input n=1 ops=9;#9 input n=1 ops=10
+23|input pos=0 text=k t=2300|S=8/8|T=kigecabdfhj|C=1|R=-|#3 input n=1 ops=4;#4 input n=1 ops=5;#5 input n=1 ops=6;#6 input n=1 ops=7;#7 input n=1 ops=8;#8 input n=1 ops=9;#9 input n=1 ops=10;#10 input n=1 ops=11

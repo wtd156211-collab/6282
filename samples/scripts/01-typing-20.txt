@@ -1,0 +1,26 @@
+input pos=0 text=a t=0
+input pos=1 text=b t=90
+input pos=2 text=c t=180
+input pos=3 text=d t=270
+input pos=4 text=e t=360
+input pos=5 text=f t=450
+input pos=6 text=g t=540
+input pos=7 text=h t=630
+input pos=8 text=i t=720
+input pos=9 text=j t=810
+input pos=10 text=k t=900
+input pos=11 text=l t=990
+input pos=12 text=m t=1080
+input pos=13 text=n t=1170
+input pos=14 text=o t=1260
+input pos=15 text=p t=1350
+input pos=16 text=q t=1440
+input pos=17 text=r t=1530
+input pos=18 text=s t=1620
+input pos=19 text=t t=1710
+undo t=2000
+undo t=2100
+undo t=2200
+redo t=2300
+redo t=2400
+redo t=2500

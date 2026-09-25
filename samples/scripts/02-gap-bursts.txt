@@ -1,0 +1,12 @@
+input pos=0 text=a t=0
+input pos=1 text=b t=500
+input pos=2 text=c t=1001
+input pos=3 text=d t=1040
+input pos=4 text=e t=3000
+input pos=5 text=f t=3040
+input pos=6 text=g t=3100
+input pos=7 text=h t=5999
+undo t=6000
+undo t=6100
+redo t=6200
+redo t=6300

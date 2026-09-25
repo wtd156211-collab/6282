@@ -1,0 +1,12 @@
+1|input pos=0 text=a t=0|S=1/8|T=a|C=1|R=-|#1 input n=1 ops=1
+2|input pos=1 text=b t=500|S=1/8|T=ab|C=2|R=-|#1 input n=2 ops=1-2
+3|input pos=2 text=c t=1001|S=2/8|T=abc|C=3|R=-|#1 input n=2 ops=1-2;#2 input n=1 ops=3
+4|input pos=3 text=d t=1040|S=2/8|T=abcd|C=4|R=-|#1 input n=2 ops=1-2;#2 input n=2 ops=3-4
+5|input pos=4 text=e t=3000|S=3/8|T=abcde|C=5|R=-|#1 input n=2 ops=1-2;#2 input n=2 ops=3-4;#3 input n=1 ops=5
+6|input pos=5 text=f t=3040|S=3/8|T=abcdef|C=6|R=-|#1 input n=2 ops=1-2;#2 input n=2 ops=3-4;#3 input n=2 ops=5-6
+7|input pos=6 text=g t=3100|S=3/8|T=abcdefg|C=7|R=-|#1 input n=2 ops=1-2;#2 input n=2 ops=3-4;#3 input n=3 ops=5-7
+8|input pos=7 text=h t=5999|S=4/8|T=abcdefgh|C=8|R=-|#1 input n=2 ops=1-2;#2 input n=2 ops=3-4;#3 input n=3 ops=5-7;#4 input n=1 ops=8
+9|undo t=6000|S=2/8|T=abcd|C=4|R=#3,#4|#1 input n=2 ops=1-2;#2 input n=2 ops=3-4
+10|undo t=6100|S=0/8|T=-|C=0|R=#3,#4+#1,#2|-
+11|redo t=6200|S=2/8|T=abcd|C=4|R=#3,#4|#1 input n=2 ops=1-2;#2 input n=2 ops=3-4
+12|redo t=6300|S=4/8|T=abcdefgh|C=8|R=-|#1 input n=2 ops=1-2;#2 input n=2 ops=3-4;#3 input n=3 ops=5-7;#4 input n=1 ops=8

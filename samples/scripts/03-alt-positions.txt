@@ -1,0 +1,23 @@
+input pos=0 text=a t=0
+caret pos=1 t=100
+input pos=1 text=b t=200
+caret pos=0 t=300
+input pos=0 text=c t=400
+caret pos=3 t=500
+input pos=3 text=d t=600
+caret pos=0 t=700
+input pos=0 text=e t=800
+caret pos=5 t=900
+input pos=5 text=f t=1000
+caret pos=0 t=1100
+input pos=0 text=g t=1200
+caret pos=7 t=1300
+input pos=7 text=h t=1400
+caret pos=0 t=1500
+input pos=0 text=i t=1600
+caret pos=9 t=1700
+input pos=9 text=j t=1800
+undo t=2000
+redo t=2100
+caret pos=0 t=2200
+input pos=0 text=k t=2300

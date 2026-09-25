@@ -1,0 +1,16 @@
+paste pos=0 text=abc t=0
+paste pos=3 text=de t=100
+paste pos=5 text=fg t=150
+caret pos=2 t=200
+paste pos=2 text=xy t=300
+paste pos=4 text=zw t=400
+paste pos=6 text=pq t=500
+undo t=1000
+caret pos=7 t=1100
+redo t=1200
+undo t=1300
+input pos=2 text=q t=1400
+input pos=3 text=r t=1450
+redo t=1500
+undo t=1700
+redo t=1800
