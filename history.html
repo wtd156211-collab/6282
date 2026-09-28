@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>撤销栈合并视图</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f6f7f9;
+      color: #172033;
+    }
+    body { margin: 0; padding: 24px; }
+    h1 { margin: 0 0 20px; font-size: 24px; }
+    section {
+      background: #fff;
+      border: 1px solid #d9dee8;
+      border-radius: 12px;
+      margin: 0 0 24px;
+      padding: 18px;
+      box-shadow: 0 1px 3px rgb(20 30 50 / 8%);
+    }
+    header { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+    h2 { margin: 0; font-size: 19px; }
+    h3 { margin: 0 0 10px; font-size: 14px; color: #5b6575; }
+    .metrics { display: flex; gap: 8px; flex-wrap: wrap; }
+    .metrics span {
+      background: #eef2f7;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 13px;
+    }
+    .board { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr); gap: 16px; margin-top: 16px; }
+    .pane {
+      border: 1px solid #e2e6ee;
+      border-radius: 10px;
+      min-width: 0;
+      padding: 12px;
+    }
+    .list { display: flex; flex-direction: column; gap: 6px; max-height: 520px; overflow: auto; }
+    .op, .entry {
+      align-items: center;
+      border-radius: 8px;
+      display: flex;
+      gap: 8px;
+      padding: 6px 8px;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 13px;
+    }
+    .op-index {
+      border-radius: 6px;
+      color: #657085;
+      min-width: 30px;
+      text-align: right;
+    }
+    .swatch { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+    .empty { color: #748094; padding: 8px; }
+    .color-0 { background: #dbeafe; }
+    .color-0 .swatch { background: #2563eb; }
+    .color-1 { background: #dcfce7; }
+    .color-1 .swatch { background: #16a34a; }
+    .color-2 { background: #ffedd5; }
+    .color-2 .swatch { background: #ea580c; }
+    .color-3 { background: #fce7f3; }
+    .color-3 .swatch { background: #db2777; }
+    .color-4 { background: #ede9fe; }
+    .color-4 .swatch { background: #7c3aed; }
+    .color-5 { background: #cffafe; }
+    .color-5 .swatch { background: #0891b2; }
+    .color-6 { background: #fef9c3; }
+    .color-6 .swatch { background: #ca8a04; }
+    .color-7 { background: #fee2e2; }
+    .color-7 .swatch { background: #dc2626; }
+    @media (max-width: 760px) { .board { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <h1>撤销栈合并视图</h1>
+  <section data-script="01-typing-20">
+  <header>
+    <h2>01-typing-20</h2>
+    <div class="metrics">
+      <span data-stack="4/8">栈长 4/8</span>
+      <span>记录 26</span>
+      <span>操作 20</span>
+      <span>撤销 3</span>
+      <span>重做 3</span>
+    </div>
+  </header>
+  <div class="board">
+    <div class="pane">
+      <h3>操作序列</h3>
+      <div class="list">
+        <div class="op color-0" data-op="1"><span class="op-index">1</span><span>input · pos=0 · text=a · t=0</span></div><div class="op color-0" data-op="2"><span class="op-index">2</span><span>input · pos=1 · text=b · t=90</span></div><div class="op color-0" data-op="3"><span class="op-index">3</span><span>input · pos=2 · text=c · t=180</span></div><div class="op color-0" data-op="4"><span class="op-index">4</span><span>input · pos=3 · text=d · t=270</span></div><div class="op color-0" data-op="5"><span class="op-index">5</span><span>input · pos=4 · text=e · t=360</span></div><div class="op color-0" data-op="6"><span class="op-index">6</span><span>input · pos=5 · text=f · t=450</span></div><div class="op color-1" data-op="7"><span class="op-index">7</span><span>input · pos=6 · text=g · t=540</span></div><div class="op color-1" data-op="8"><span class="op-index">8</span><span>input · pos=7 · text=h · t=630</span></div><div class="op color-1" data-op="9"><span class="op-index">9</span><span>input · pos=8 · text=i · t=720</span></div><div class="op color-1" data-op="10"><span class="op-index">10</span><span>input · pos=9 · text=j · t=810</span></div><div class="op color-1" data-op="11"><span class="op-index">11</span><span>input · pos=10 · text=k · t=900</span></div><div class="op color-1" data-op="12"><span class="op-index">12</span><span>input · pos=11 · text=l · t=990</span></div><div class="op color-2" data-op="13"><span class="op-index">13</span><span>input · pos=12 · text=m · t=1080</span></div><div class="op color-2" data-op="14"><span class="op-index">14</span><span>input · pos=13 · text=n · t=1170</span></div><div class="op color-2" data-op="15"><span class="op-index">15</span><span>input · pos=14 · text=o · t=1260</span></div><div class="op color-2" data-op="16"><span class="op-index">16</span><span>input · pos=15 · text=p · t=1350</span></div><div class="op color-2" data-op="17"><span class="op-index">17</span><span>input · pos=16 · text=q · t=1440</span></div><div class="op color-2" data-op="18"><span class="op-index">18</span><span>input · pos=17 · text=r · t=1530</span></div><div class="op color-3" data-op="19"><span class="op-index">19</span><span>input · pos=18 · text=s · t=1620</span></div><div class="op color-3" data-op="20"><span class="op-index">20</span><span>input · pos=19 · text=t · t=1710</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>undo · t=2000</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>undo · t=2100</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>undo · t=2200</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>redo · t=2300</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>redo · t=2400</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>redo · t=2500</span></div>
+      </div>
+    </div>
+    <div class="pane">
+      <h3>合并后的栈条目</h3>
+      <div class="list">
+        <div class="entry color-0" data-entry="1" data-ops="1-6" data-count="6"><span class="swatch"></span><span>#1 input n=6 ops=1-6</span></div><div class="entry color-1" data-entry="2" data-ops="7-12" data-count="6"><span class="swatch"></span><span>#2 input n=6 ops=7-12</span></div><div class="entry color-2" data-entry="3" data-ops="13-18" data-count="6"><span class="swatch"></span><span>#3 input n=6 ops=13-18</span></div><div class="entry color-3" data-entry="4" data-ops="19-20" data-count="2"><span class="swatch"></span><span>#4 input n=2 ops=19-20</span></div>
+      </div>
+    </div>
+  </div>
+</section><section data-script="02-gap-bursts">
+  <header>
+    <h2>02-gap-bursts</h2>
+    <div class="metrics">
+      <span data-stack="4/8">栈长 4/8</span>
+      <span>记录 12</span>
+      <span>操作 8</span>
+      <span>撤销 2</span>
+      <span>重做 2</span>
+    </div>
+  </header>
+  <div class="board">
+    <div class="pane">
+      <h3>操作序列</h3>
+      <div class="list">
+        <div class="op color-0" data-op="1"><span class="op-index">1</span><span>input · pos=0 · text=a · t=0</span></div><div class="op color-0" data-op="2"><span class="op-index">2</span><span>input · pos=1 · text=b · t=500</span></div><div class="op color-1" data-op="3"><span class="op-index">3</span><span>input · pos=2 · text=c · t=1001</span></div><div class="op color-1" data-op="4"><span class="op-index">4</span><span>input · pos=3 · text=d · t=1040</span></div><div class="op color-2" data-op="5"><span class="op-index">5</span><span>input · pos=4 · text=e · t=3000</span></div><div class="op color-2" data-op="6"><span class="op-index">6</span><span>input · pos=5 · text=f · t=3040</span></div><div class="op color-2" data-op="7"><span class="op-index">7</span><span>input · pos=6 · text=g · t=3100</span></div><div class="op color-3" data-op="8"><span class="op-index">8</span><span>input · pos=7 · text=h · t=5999</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>undo · t=6000</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>undo · t=6100</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>redo · t=6200</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>redo · t=6300</span></div>
+      </div>
+    </div>
+    <div class="pane">
+      <h3>合并后的栈条目</h3>
+      <div class="list">
+        <div class="entry color-0" data-entry="1" data-ops="1-2" data-count="2"><span class="swatch"></span><span>#1 input n=2 ops=1-2</span></div><div class="entry color-1" data-entry="2" data-ops="3-4" data-count="2"><span class="swatch"></span><span>#2 input n=2 ops=3-4</span></div><div class="entry color-2" data-entry="3" data-ops="5-7" data-count="3"><span class="swatch"></span><span>#3 input n=3 ops=5-7</span></div><div class="entry color-3" data-entry="4" data-ops="8" data-count="1"><span class="swatch"></span><span>#4 input n=1 ops=8</span></div>
+      </div>
+    </div>
+  </div>
+</section><section data-script="03-alt-positions">
+  <header>
+    <h2>03-alt-positions</h2>
+    <div class="metrics">
+      <span data-stack="8/8">栈长 8/8</span>
+      <span>记录 23</span>
+      <span>操作 11</span>
+      <span>撤销 1</span>
+      <span>重做 1</span>
+    </div>
+  </header>
+  <div class="board">
+    <div class="pane">
+      <h3>操作序列</h3>
+      <div class="list">
+        <div class="op" data-op="1"><span class="op-index">1</span><span>input · pos=0 · text=a · t=0</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>caret · pos=1 · t=100</span></div><div class="op" data-op="2"><span class="op-index">2</span><span>input · pos=1 · text=b · t=200</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>caret · pos=0 · t=300</span></div><div class="op" data-op="3"><span class="op-index">3</span><span>input · pos=0 · text=c · t=400</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>caret · pos=3 · t=500</span></div><div class="op color-0" data-op="4"><span class="op-index">4</span><span>input · pos=3 · text=d · t=600</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>caret · pos=0 · t=700</span></div><div class="op color-1" data-op="5"><span class="op-index">5</span><span>input · pos=0 · text=e · t=800</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>caret · pos=5 · t=900</span></div><div class="op color-2" data-op="6"><span class="op-index">6</span><span>input · pos=5 · text=f · t=1000</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>caret · pos=0 · t=1100</span></div><div class="op color-3" data-op="7"><span class="op-index">7</span><span>input · pos=0 · text=g · t=1200</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>caret · pos=7 · t=1300</span></div><div class="op color-4" data-op="8"><span class="op-index">8</span><span>input · pos=7 · text=h · t=1400</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>caret · pos=0 · t=1500</span></div><div class="op color-5" data-op="9"><span class="op-index">9</span><span>input · pos=0 · text=i · t=1600</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>caret · pos=9 · t=1700</span></div><div class="op color-6" data-op="10"><span class="op-index">10</span><span>input · pos=9 · text=j · t=1800</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>undo · t=2000</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>redo · t=2100</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>caret · pos=0 · t=2200</span></div><div class="op color-7" data-op="11"><span class="op-index">11</span><span>input · pos=0 · text=k · t=2300</span></div>
+      </div>
+    </div>
+    <div class="pane">
+      <h3>合并后的栈条目</h3>
+      <div class="list">
+        <div class="entry color-0" data-entry="3" data-ops="4" data-count="1"><span class="swatch"></span><span>#3 input n=1 ops=4</span></div><div class="entry color-1" data-entry="4" data-ops="5" data-count="1"><span class="swatch"></span><span>#4 input n=1 ops=5</span></div><div class="entry color-2" data-entry="5" data-ops="6" data-count="1"><span class="swatch"></span><span>#5 input n=1 ops=6</span></div><div class="entry color-3" data-entry="6" data-ops="7" data-count="1"><span class="swatch"></span><span>#6 input n=1 ops=7</span></div><div class="entry color-4" data-entry="7" data-ops="8" data-count="1"><span class="swatch"></span><span>#7 input n=1 ops=8</span></div><div class="entry color-5" data-entry="8" data-ops="9" data-count="1"><span class="swatch"></span><span>#8 input n=1 ops=9</span></div><div class="entry color-6" data-entry="9" data-ops="10" data-count="1"><span class="swatch"></span><span>#9 input n=1 ops=10</span></div><div class="entry color-7" data-entry="10" data-ops="11" data-count="1"><span class="swatch"></span><span>#10 input n=1 ops=11</span></div>
+      </div>
+    </div>
+  </div>
+</section><section data-script="04-branch">
+  <header>
+    <h2>04-branch</h2>
+    <div class="metrics">
+      <span data-stack="2/8">栈长 2/8</span>
+      <span>记录 16</span>
+      <span>操作 8</span>
+      <span>撤销 3</span>
+      <span>重做 3</span>
+    </div>
+  </header>
+  <div class="board">
+    <div class="pane">
+      <h3>操作序列</h3>
+      <div class="list">
+        <div class="op color-0" data-op="1"><span class="op-index">1</span><span>paste · pos=0 · text=abc · t=0</span></div><div class="op color-0" data-op="2"><span class="op-index">2</span><span>paste · pos=3 · text=de · t=100</span></div><div class="op color-0" data-op="3"><span class="op-index">3</span><span>paste · pos=5 · text=fg · t=150</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>caret · pos=2 · t=200</span></div><div class="op" data-op="4"><span class="op-index">4</span><span>paste · pos=2 · text=xy · t=300</span></div><div class="op" data-op="5"><span class="op-index">5</span><span>paste · pos=4 · text=zw · t=400</span></div><div class="op" data-op="6"><span class="op-index">6</span><span>paste · pos=6 · text=pq · t=500</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>undo · t=1000</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>caret · pos=7 · t=1100</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>redo · t=1200</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>undo · t=1300</span></div><div class="op color-1" data-op="7"><span class="op-index">7</span><span>input · pos=2 · text=q · t=1400</span></div><div class="op color-1" data-op="8"><span class="op-index">8</span><span>input · pos=3 · text=r · t=1450</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>redo · t=1500</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>undo · t=1700</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>redo · t=1800</span></div>
+      </div>
+    </div>
+    <div class="pane">
+      <h3>合并后的栈条目</h3>
+      <div class="list">
+        <div class="entry color-0" data-entry="1" data-ops="1-3" data-count="3"><span class="swatch"></span><span>#1 paste n=3 ops=1-3</span></div><div class="entry color-1" data-entry="3" data-ops="7-8" data-count="2"><span class="swatch"></span><span>#3 input n=2 ops=7-8</span></div>
+      </div>
+    </div>
+  </div>
+</section><section data-script="05-paste">
+  <header>
+    <h2>05-paste</h2>
+    <div class="metrics">
+      <span data-stack="4/8">栈长 4/8</span>
+      <span>记录 11</span>
+      <span>操作 9</span>
+      <span>撤销 1</span>
+      <span>重做 1</span>
+    </div>
+  </header>
+  <div class="board">
+    <div class="pane">
+      <h3>操作序列</h3>
+      <div class="list">
+        <div class="op color-0" data-op="1"><span class="op-index">1</span><span>paste · pos=0 · text=abc · t=0</span></div><div class="op color-0" data-op="2"><span class="op-index">2</span><span>paste · pos=3 · text=de · t=100</span></div><div class="op color-0" data-op="3"><span class="op-index">3</span><span>paste · pos=5 · text=fgh · t=150</span></div><div class="op color-1" data-op="4"><span class="op-index">4</span><span>input · pos=8 · text=i · t=200</span></div><div class="op color-1" data-op="5"><span class="op-index">5</span><span>input · pos=9 · text=j · t=250</span></div><div class="op color-2" data-op="6"><span class="op-index">6</span><span>paste · pos=10 · text=kl · t=300</span></div><div class="op color-2" data-op="7"><span class="op-index">7</span><span>paste · pos=12 · text=mn · t=400</span></div><div class="op color-2" data-op="8"><span class="op-index">8</span><span>paste · pos=14 · text=op · t=500</span></div><div class="op color-3" data-op="9"><span class="op-index">9</span><span>paste · pos=16 · text=qr · t=1001</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>undo · t=1100</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>redo · t=1200</span></div>
+      </div>
+    </div>
+    <div class="pane">
+      <h3>合并后的栈条目</h3>
+      <div class="list">
+        <div class="entry color-0" data-entry="1" data-ops="1-3" data-count="3"><span class="swatch"></span><span>#1 paste n=3 ops=1-3</span></div><div class="entry color-1" data-entry="2" data-ops="4-5" data-count="2"><span class="swatch"></span><span>#2 input n=2 ops=4-5</span></div><div class="entry color-2" data-entry="3" data-ops="6-8" data-count="3"><span class="swatch"></span><span>#3 paste n=3 ops=6-8</span></div><div class="entry color-3" data-entry="4" data-ops="9" data-count="1"><span class="swatch"></span><span>#4 paste n=1 ops=9</span></div>
+      </div>
+    </div>
+  </div>
+</section><section data-script="06-edges">
+  <header>
+    <h2>06-edges</h2>
+    <div class="metrics">
+      <span data-stack="2/8">栈长 2/8</span>
+      <span>记录 20</span>
+      <span>操作 10</span>
+      <span>撤销 5</span>
+      <span>重做 5</span>
+    </div>
+  </header>
+  <div class="board">
+    <div class="pane">
+      <h3>操作序列</h3>
+      <div class="list">
+        <div class="op color-0" data-op="1"><span class="op-index">1</span><span>input · pos=0 · text=a · t=0</span></div><div class="op color-0" data-op="2"><span class="op-index">2</span><span>input · pos=1 · text=b · t=10</span></div><div class="op color-0" data-op="3"><span class="op-index">3</span><span>input · pos=2 · text=c · t=20</span></div><div class="op color-0" data-op="4"><span class="op-index">4</span><span>input · pos=3 · text=d · t=30</span></div><div class="op color-0" data-op="5"><span class="op-index">5</span><span>input · pos=4 · text=e · t=40</span></div><div class="op color-0" data-op="6"><span class="op-index">6</span><span>input · pos=5 · text=f · t=50</span></div><div class="op color-1" data-op="7"><span class="op-index">7</span><span>input · pos=6 · text=g · t=60</span></div><div class="op color-1" data-op="8"><span class="op-index">8</span><span>input · pos=7 · text=h · t=70</span></div><div class="op color-1" data-op="9"><span class="op-index">9</span><span>input · pos=8 · text=i · t=80</span></div><div class="op color-1" data-op="10"><span class="op-index">10</span><span>input · pos=9 · text=j · t=90</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>undo · t=100</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>undo · t=110</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>redo · t=120</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>redo · t=130</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>undo · t=140</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>undo · t=150</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>undo · t=160</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>redo · t=170</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>redo · t=180</span></div><div class="op" data-op="-"><span class="op-index">-</span><span>redo · t=190</span></div>
+      </div>
+    </div>
+    <div class="pane">
+      <h3>合并后的栈条目</h3>
+      <div class="list">
+        <div class="entry color-0" data-entry="1" data-ops="1-6" data-count="6"><span class="swatch"></span><span>#1 input n=6 ops=1-6</span></div><div class="entry color-1" data-entry="2" data-ops="7-10" data-count="4"><span class="swatch"></span><span>#2 input n=4 ops=7-10</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
