@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>撤销栈合并对照</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #f4f5f7; color: #1f2430;
+  font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; }
+header { padding: 20px 28px 8px; }
+header h1 { margin: 0 0 4px; font-size: 20px; }
+header p { margin: 0; color: #666; font-size: 13px; }
+section { background: #fff; margin: 16px 28px; border: 1px solid #dfe3e8;
+  border-radius: 8px; padding: 16px 20px; }
+section h2 { margin: 0 0 6px; font-size: 16px; }
+.meta { margin: 0 0 14px; font-size: 13px; color: #555; }
+.meta .stack { display: inline-block; padding: 1px 8px; border-radius: 10px;
+  background: #eef1f5; color: #1f2430; }
+.cols { display: flex; gap: 20px; align-items: flex-start; }
+.colh { font-size: 12px; color: #888; margin: 0 0 6px; }
+.ops { flex: 1 1 56%; }
+.entries { flex: 1 1 44%; }
+.op, .entry { border-radius: 4px; padding: 3px 8px; margin: 2px 0;
+  font: 12px/1.5 "SFMono-Regular", Consolas, monospace; }
+.op { border-left: 4px solid #d8dce2; background: #fafbfc; }
+.op .oid { display: inline-block; min-width: 3.2em; color: #8a909c; }
+.entry { border: 1px solid #d8dce2; display: flex; gap: 10px;
+  align-items: baseline; }
+.entry .chip { display: inline-block; width: 12px; height: 12px; border-radius: 3px;
+  border: 1px solid rgba(0,0,0,.15); align-self: center; }
+.entry .eid { font-weight: 600; min-width: 2.6em; }
+.entry .en { margin-left: auto; color: #555; }
+</style>
+</head>
+<body>
+<header>
+<h1>撤销栈合并对照</h1>
+<p>左列为操作记录，右列为最终栈条目；同色表示条目覆盖的操作。栈长上界 8，单条目最多 6 条，单次撤销至少回退 3 条。</p>
+</header>
+<section data-script="01-typing-20">
+<h2>01-typing-20</h2>
+<p class="meta">记录数 26 · 操作 20 条 · 撤销 3 次 · 重做 3 次 · <span class="stack" data-stack="4/8">栈长 4/8</span></p>
+<div class="cols">
+<div class="ops"><p class="colh">操作序列</p>
+<div class="op" data-op="1" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#1</span> input pos=0 text=a t=0</div>
+<div class="op" data-op="2" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#2</span> input pos=1 text=b t=90</div>
+<div class="op" data-op="3" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#3</span> input pos=2 text=c t=180</div>
+<div class="op" data-op="4" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#4</span> input pos=3 text=d t=270</div>
+<div class="op" data-op="5" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#5</span> input pos=4 text=e t=360</div>
+<div class="op" data-op="6" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#6</span> input pos=5 text=f t=450</div>
+<div class="op" data-op="7" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#7</span> input pos=6 text=g t=540</div>
+<div class="op" data-op="8" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#8</span> input pos=7 text=h t=630</div>
+<div class="op" data-op="9" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#9</span> input pos=8 text=i t=720</div>
+<div class="op" data-op="10" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#10</span> input pos=9 text=j t=810</div>
+<div class="op" data-op="11" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#11</span> input pos=10 text=k t=900</div>
+<div class="op" data-op="12" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#12</span> input pos=11 text=l t=990</div>
+<div class="op" data-op="13" style="background:hsl(274, 86%, 90%);border-left-color:hsl(274, 72%, 42%)"><span class="oid">#13</span> input pos=12 text=m t=1080</div>
+<div class="op" data-op="14" style="background:hsl(274, 86%, 90%);border-left-color:hsl(274, 72%, 42%)"><span class="oid">#14</span> input pos=13 text=n t=1170</div>
+<div class="op" data-op="15" style="background:hsl(274, 86%, 90%);border-left-color:hsl(274, 72%, 42%)"><span class="oid">#15</span> input pos=14 text=o t=1260</div>
+<div class="op" data-op="16" style="background:hsl(274, 86%, 90%);border-left-color:hsl(274, 72%, 42%)"><span class="oid">#16</span> input pos=15 text=p t=1350</div>
+<div class="op" data-op="17" style="background:hsl(274, 86%, 90%);border-left-color:hsl(274, 72%, 42%)"><span class="oid">#17</span> input pos=16 text=q t=1440</div>
+<div class="op" data-op="18" style="background:hsl(274, 86%, 90%);border-left-color:hsl(274, 72%, 42%)"><span class="oid">#18</span> input pos=17 text=r t=1530</div>
+<div class="op" data-op="19" style="background:hsl(51, 86%, 90%);border-left-color:hsl(51, 72%, 42%)"><span class="oid">#19</span> input pos=18 text=s t=1620</div>
+<div class="op" data-op="20" style="background:hsl(51, 86%, 90%);border-left-color:hsl(51, 72%, 42%)"><span class="oid">#20</span> input pos=19 text=t t=1710</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> undo t=2000</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> undo t=2100</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> undo t=2200</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> redo t=2300</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> redo t=2400</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> redo t=2500</div>
+</div>
+<div class="entries"><p class="colh">合并后的栈条目（栈底→栈顶）</p>
+<div class="entry" data-entry="1" data-ops="1-6" data-count="6" style="background:hsl(0, 86%, 90%)"><span class="chip" style="background:hsl(0, 72%, 42%)"></span><span class="eid">#1</span><span class="ekind">input</span><span class="en">覆盖 6 条 · ops=1-6</span></div>
+<div class="entry" data-entry="2" data-ops="7-12" data-count="6" style="background:hsl(137, 86%, 90%)"><span class="chip" style="background:hsl(137, 72%, 42%)"></span><span class="eid">#2</span><span class="ekind">input</span><span class="en">覆盖 6 条 · ops=7-12</span></div>
+<div class="entry" data-entry="3" data-ops="13-18" data-count="6" style="background:hsl(274, 86%, 90%)"><span class="chip" style="background:hsl(274, 72%, 42%)"></span><span class="eid">#3</span><span class="ekind">input</span><span class="en">覆盖 6 条 · ops=13-18</span></div>
+<div class="entry" data-entry="4" data-ops="19-20" data-count="2" style="background:hsl(51, 86%, 90%)"><span class="chip" style="background:hsl(51, 72%, 42%)"></span><span class="eid">#4</span><span class="ekind">input</span><span class="en">覆盖 2 条 · ops=19-20</span></div>
+</div>
+</div>
+</section>
+<section data-script="02-gap-bursts">
+<h2>02-gap-bursts</h2>
+<p class="meta">记录数 12 · 操作 8 条 · 撤销 2 次 · 重做 2 次 · <span class="stack" data-stack="4/8">栈长 4/8</span></p>
+<div class="cols">
+<div class="ops"><p class="colh">操作序列</p>
+<div class="op" data-op="1" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#1</span> input pos=0 text=a t=0</div>
+<div class="op" data-op="2" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#2</span> input pos=1 text=b t=500</div>
+<div class="op" data-op="3" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#3</span> input pos=2 text=c t=1001</div>
+<div class="op" data-op="4" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#4</span> input pos=3 text=d t=1040</div>
+<div class="op" data-op="5" style="background:hsl(274, 86%, 90%);border-left-color:hsl(274, 72%, 42%)"><span class="oid">#5</span> input pos=4 text=e t=3000</div>
+<div class="op" data-op="6" style="background:hsl(274, 86%, 90%);border-left-color:hsl(274, 72%, 42%)"><span class="oid">#6</span> input pos=5 text=f t=3040</div>
+<div class="op" data-op="7" style="background:hsl(274, 86%, 90%);border-left-color:hsl(274, 72%, 42%)"><span class="oid">#7</span> input pos=6 text=g t=3100</div>
+<div class="op" data-op="8" style="background:hsl(51, 86%, 90%);border-left-color:hsl(51, 72%, 42%)"><span class="oid">#8</span> input pos=7 text=h t=5999</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> undo t=6000</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> undo t=6100</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> redo t=6200</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> redo t=6300</div>
+</div>
+<div class="entries"><p class="colh">合并后的栈条目（栈底→栈顶）</p>
+<div class="entry" data-entry="1" data-ops="1-2" data-count="2" style="background:hsl(0, 86%, 90%)"><span class="chip" style="background:hsl(0, 72%, 42%)"></span><span class="eid">#1</span><span class="ekind">input</span><span class="en">覆盖 2 条 · ops=1-2</span></div>
+<div class="entry" data-entry="2" data-ops="3-4" data-count="2" style="background:hsl(137, 86%, 90%)"><span class="chip" style="background:hsl(137, 72%, 42%)"></span><span class="eid">#2</span><span class="ekind">input</span><span class="en">覆盖 2 条 · ops=3-4</span></div>
+<div class="entry" data-entry="3" data-ops="5-7" data-count="3" style="background:hsl(274, 86%, 90%)"><span class="chip" style="background:hsl(274, 72%, 42%)"></span><span class="eid">#3</span><span class="ekind">input</span><span class="en">覆盖 3 条 · ops=5-7</span></div>
+<div class="entry" data-entry="4" data-ops="8" data-count="1" style="background:hsl(51, 86%, 90%)"><span class="chip" style="background:hsl(51, 72%, 42%)"></span><span class="eid">#4</span><span class="ekind">input</span><span class="en">覆盖 1 条 · ops=8</span></div>
+</div>
+</div>
+</section>
+<section data-script="03-alt-positions">
+<h2>03-alt-positions</h2>
+<p class="meta">记录数 23 · 操作 11 条 · 撤销 1 次 · 重做 1 次 · <span class="stack" data-stack="8/8">栈长 8/8</span></p>
+<div class="cols">
+<div class="ops"><p class="colh">操作序列</p>
+<div class="op" data-op="1" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid">#1</span> input pos=0 text=a t=0</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> caret pos=1 t=100</div>
+<div class="op" data-op="2" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid">#2</span> input pos=1 text=b t=200</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> caret pos=0 t=300</div>
+<div class="op" data-op="3" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid">#3</span> input pos=0 text=c t=400</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> caret pos=3 t=500</div>
+<div class="op" data-op="4" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#4</span> input pos=3 text=d t=600</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> caret pos=0 t=700</div>
+<div class="op" data-op="5" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#5</span> input pos=0 text=e t=800</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> caret pos=5 t=900</div>
+<div class="op" data-op="6" style="background:hsl(274, 86%, 90%);border-left-color:hsl(274, 72%, 42%)"><span class="oid">#6</span> input pos=5 text=f t=1000</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> caret pos=0 t=1100</div>
+<div class="op" data-op="7" style="background:hsl(51, 86%, 90%);border-left-color:hsl(51, 72%, 42%)"><span class="oid">#7</span> input pos=0 text=g t=1200</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> caret pos=7 t=1300</div>
+<div class="op" data-op="8" style="background:hsl(188, 86%, 90%);border-left-color:hsl(188, 72%, 42%)"><span class="oid">#8</span> input pos=7 text=h t=1400</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> caret pos=0 t=1500</div>
+<div class="op" data-op="9" style="background:hsl(325, 86%, 90%);border-left-color:hsl(325, 72%, 42%)"><span class="oid">#9</span> input pos=0 text=i t=1600</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> caret pos=9 t=1700</div>
+<div class="op" data-op="10" style="background:hsl(102, 86%, 90%);border-left-color:hsl(102, 72%, 42%)"><span class="oid">#10</span> input pos=9 text=j t=1800</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> undo t=2000</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> redo t=2100</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> caret pos=0 t=2200</div>
+<div class="op" data-op="11" style="background:hsl(239, 86%, 90%);border-left-color:hsl(239, 72%, 42%)"><span class="oid">#11</span> input pos=0 text=k t=2300</div>
+</div>
+<div class="entries"><p class="colh">合并后的栈条目（栈底→栈顶）</p>
+<div class="entry" data-entry="3" data-ops="4" data-count="1" style="background:hsl(0, 86%, 90%)"><span class="chip" style="background:hsl(0, 72%, 42%)"></span><span class="eid">#3</span><span class="ekind">input</span><span class="en">覆盖 1 条 · ops=4</span></div>
+<div class="entry" data-entry="4" data-ops="5" data-count="1" style="background:hsl(137, 86%, 90%)"><span class="chip" style="background:hsl(137, 72%, 42%)"></span><span class="eid">#4</span><span class="ekind">input</span><span class="en">覆盖 1 条 · ops=5</span></div>
+<div class="entry" data-entry="5" data-ops="6" data-count="1" style="background:hsl(274, 86%, 90%)"><span class="chip" style="background:hsl(274, 72%, 42%)"></span><span class="eid">#5</span><span class="ekind">input</span><span class="en">覆盖 1 条 · ops=6</span></div>
+<div class="entry" data-entry="6" data-ops="7" data-count="1" style="background:hsl(51, 86%, 90%)"><span class="chip" style="background:hsl(51, 72%, 42%)"></span><span class="eid">#6</span><span class="ekind">input</span><span class="en">覆盖 1 条 · ops=7</span></div>
+<div class="entry" data-entry="7" data-ops="8" data-count="1" style="background:hsl(188, 86%, 90%)"><span class="chip" style="background:hsl(188, 72%, 42%)"></span><span class="eid">#7</span><span class="ekind">input</span><span class="en">覆盖 1 条 · ops=8</span></div>
+<div class="entry" data-entry="8" data-ops="9" data-count="1" style="background:hsl(325, 86%, 90%)"><span class="chip" style="background:hsl(325, 72%, 42%)"></span><span class="eid">#8</span><span class="ekind">input</span><span class="en">覆盖 1 条 · ops=9</span></div>
+<div class="entry" data-entry="9" data-ops="10" data-count="1" style="background:hsl(102, 86%, 90%)"><span class="chip" style="background:hsl(102, 72%, 42%)"></span><span class="eid">#9</span><span class="ekind">input</span><span class="en">覆盖 1 条 · ops=10</span></div>
+<div class="entry" data-entry="10" data-ops="11" data-count="1" style="background:hsl(239, 86%, 90%)"><span class="chip" style="background:hsl(239, 72%, 42%)"></span><span class="eid">#10</span><span class="ekind">input</span><span class="en">覆盖 1 条 · ops=11</span></div>
+</div>
+</div>
+</section>
+<section data-script="04-branch">
+<h2>04-branch</h2>
+<p class="meta">记录数 16 · 操作 8 条 · 撤销 3 次 · 重做 3 次 · <span class="stack" data-stack="2/8">栈长 2/8</span></p>
+<div class="cols">
+<div class="ops"><p class="colh">操作序列</p>
+<div class="op" data-op="1" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#1</span> paste pos=0 text=abc t=0</div>
+<div class="op" data-op="2" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#2</span> paste pos=3 text=de t=100</div>
+<div class="op" data-op="3" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#3</span> paste pos=5 text=fg t=150</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> caret pos=2 t=200</div>
+<div class="op" data-op="4" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid">#4</span> paste pos=2 text=xy t=300</div>
+<div class="op" data-op="5" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid">#5</span> paste pos=4 text=zw t=400</div>
+<div class="op" data-op="6" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid">#6</span> paste pos=6 text=pq t=500</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> undo t=1000</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> caret pos=7 t=1100</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> redo t=1200</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> undo t=1300</div>
+<div class="op" data-op="7" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#7</span> input pos=2 text=q t=1400</div>
+<div class="op" data-op="8" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#8</span> input pos=3 text=r t=1450</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> redo t=1500</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> undo t=1700</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> redo t=1800</div>
+</div>
+<div class="entries"><p class="colh">合并后的栈条目（栈底→栈顶）</p>
+<div class="entry" data-entry="1" data-ops="1-3" data-count="3" style="background:hsl(0, 86%, 90%)"><span class="chip" style="background:hsl(0, 72%, 42%)"></span><span class="eid">#1</span><span class="ekind">paste</span><span class="en">覆盖 3 条 · ops=1-3</span></div>
+<div class="entry" data-entry="3" data-ops="7-8" data-count="2" style="background:hsl(137, 86%, 90%)"><span class="chip" style="background:hsl(137, 72%, 42%)"></span><span class="eid">#3</span><span class="ekind">input</span><span class="en">覆盖 2 条 · ops=7-8</span></div>
+</div>
+</div>
+</section>
+<section data-script="05-paste">
+<h2>05-paste</h2>
+<p class="meta">记录数 11 · 操作 9 条 · 撤销 1 次 · 重做 1 次 · <span class="stack" data-stack="4/8">栈长 4/8</span></p>
+<div class="cols">
+<div class="ops"><p class="colh">操作序列</p>
+<div class="op" data-op="1" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#1</span> paste pos=0 text=abc t=0</div>
+<div class="op" data-op="2" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#2</span> paste pos=3 text=de t=100</div>
+<div class="op" data-op="3" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#3</span> paste pos=5 text=fgh t=150</div>
+<div class="op" data-op="4" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#4</span> input pos=8 text=i t=200</div>
+<div class="op" data-op="5" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#5</span> input pos=9 text=j t=250</div>
+<div class="op" data-op="6" style="background:hsl(274, 86%, 90%);border-left-color:hsl(274, 72%, 42%)"><span class="oid">#6</span> paste pos=10 text=kl t=300</div>
+<div class="op" data-op="7" style="background:hsl(274, 86%, 90%);border-left-color:hsl(274, 72%, 42%)"><span class="oid">#7</span> paste pos=12 text=mn t=400</div>
+<div class="op" data-op="8" style="background:hsl(274, 86%, 90%);border-left-color:hsl(274, 72%, 42%)"><span class="oid">#8</span> paste pos=14 text=op t=500</div>
+<div class="op" data-op="9" style="background:hsl(51, 86%, 90%);border-left-color:hsl(51, 72%, 42%)"><span class="oid">#9</span> paste pos=16 text=qr t=1001</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> undo t=1100</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> redo t=1200</div>
+</div>
+<div class="entries"><p class="colh">合并后的栈条目（栈底→栈顶）</p>
+<div class="entry" data-entry="1" data-ops="1-3" data-count="3" style="background:hsl(0, 86%, 90%)"><span class="chip" style="background:hsl(0, 72%, 42%)"></span><span class="eid">#1</span><span class="ekind">paste</span><span class="en">覆盖 3 条 · ops=1-3</span></div>
+<div class="entry" data-entry="2" data-ops="4-5" data-count="2" style="background:hsl(137, 86%, 90%)"><span class="chip" style="background:hsl(137, 72%, 42%)"></span><span class="eid">#2</span><span class="ekind">input</span><span class="en">覆盖 2 条 · ops=4-5</span></div>
+<div class="entry" data-entry="3" data-ops="6-8" data-count="3" style="background:hsl(274, 86%, 90%)"><span class="chip" style="background:hsl(274, 72%, 42%)"></span><span class="eid">#3</span><span class="ekind">paste</span><span class="en">覆盖 3 条 · ops=6-8</span></div>
+<div class="entry" data-entry="4" data-ops="9" data-count="1" style="background:hsl(51, 86%, 90%)"><span class="chip" style="background:hsl(51, 72%, 42%)"></span><span class="eid">#4</span><span class="ekind">paste</span><span class="en">覆盖 1 条 · ops=9</span></div>
+</div>
+</div>
+</section>
+<section data-script="06-edges">
+<h2>06-edges</h2>
+<p class="meta">记录数 20 · 操作 10 条 · 撤销 5 次 · 重做 5 次 · <span class="stack" data-stack="2/8">栈长 2/8</span></p>
+<div class="cols">
+<div class="ops"><p class="colh">操作序列</p>
+<div class="op" data-op="1" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#1</span> input pos=0 text=a t=0</div>
+<div class="op" data-op="2" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#2</span> input pos=1 text=b t=10</div>
+<div class="op" data-op="3" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#3</span> input pos=2 text=c t=20</div>
+<div class="op" data-op="4" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#4</span> input pos=3 text=d t=30</div>
+<div class="op" data-op="5" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#5</span> input pos=4 text=e t=40</div>
+<div class="op" data-op="6" style="background:hsl(0, 86%, 90%);border-left-color:hsl(0, 72%, 42%)"><span class="oid">#6</span> input pos=5 text=f t=50</div>
+<div class="op" data-op="7" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#7</span> input pos=6 text=g t=60</div>
+<div class="op" data-op="8" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#8</span> input pos=7 text=h t=70</div>
+<div class="op" data-op="9" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#9</span> input pos=8 text=i t=80</div>
+<div class="op" data-op="10" style="background:hsl(137, 86%, 90%);border-left-color:hsl(137, 72%, 42%)"><span class="oid">#10</span> input pos=9 text=j t=90</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> undo t=100</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> undo t=110</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> redo t=120</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> redo t=130</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> undo t=140</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> undo t=150</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> undo t=160</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> redo t=170</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> redo t=180</div>
+<div class="op" data-op="-" style="background:#fafbfc;border-left-color:#d8dce2"><span class="oid"></span> redo t=190</div>
+</div>
+<div class="entries"><p class="colh">合并后的栈条目（栈底→栈顶）</p>
+<div class="entry" data-entry="1" data-ops="1-6" data-count="6" style="background:hsl(0, 86%, 90%)"><span class="chip" style="background:hsl(0, 72%, 42%)"></span><span class="eid">#1</span><span class="ekind">input</span><span class="en">覆盖 6 条 · ops=1-6</span></div>
+<div class="entry" data-entry="2" data-ops="7-10" data-count="4" style="background:hsl(137, 86%, 90%)"><span class="chip" style="background:hsl(137, 72%, 42%)"></span><span class="eid">#2</span><span class="ekind">input</span><span class="en">覆盖 4 条 · ops=7-10</span></div>
+</div>
+</div>
+</section>
+</body>
+</html>
